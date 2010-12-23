@@ -43,7 +43,7 @@
         <configuration>
           <filesets>
             <fileset>
-              <directory>${basedir}/src/main/java/org/brukhman/sparser/parser/</directory>
+              <directory>${basedir}/src/main/java/org/brukhman/sparser/language/</directory>
               <includes>
                 <include>**/*.*</include>
               </includes>
@@ -59,7 +59,7 @@
         <version>1.1</version>
         <executions>
           <execution>
-            <phase>process-resources</phase>
+            <phase>generate-sources</phase>
             <goals>
               <goal>exec</goal>
             </goals>
@@ -73,8 +73,25 @@
           </arguments>
         </configuration>
       </plugin>
-      
     </plugins>
+
+	<!-- INCLUDE THE DAT FILES FOR SABLECC IN THE JAR -->
+    <resources>
+    	<resource>
+    		<!-- Include the lexer.dat file -->
+    		<directory>${basedir}/src/main/java/</directory>
+    		<includes>
+    			<include>**/*.dat</include>
+    		</includes>
+    	</resource>
+    	<resource>
+    		<directory>${basedir}/src/sablecc/</directory>
+    		<includes>
+    			<include>*.*</include>
+    		</includes>
+    	</resource>
+    </resources>
+    
   </build>
   
 </project>
