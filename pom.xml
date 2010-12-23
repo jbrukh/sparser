@@ -7,8 +7,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>sparser</name>
-  <url>http://maven.apache.org</url>
+  <name>Simple Parser</name>
+  <url>None</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
