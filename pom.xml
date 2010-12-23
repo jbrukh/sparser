@@ -22,4 +22,59 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+    
+      <!-- SET THE COMPILER LEVEL TO 1.6 -->
+      <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<configuration>
+			<source>1.6</source>
+			<target>1.6</target>
+        </configuration>
+      </plugin>
+    
+      <!-- WHEN WE CLEAN, WE DELETE OUR GENERATED SOURCES (THE PARSER) -->
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.4.1</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${basedir}/src/main/java/org/brukhman/sparser/parser/</directory>
+              <includes>
+                <include>**/*.*</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      
+      <!-- BEFORE COMPILING, WE GENERATE THE SOURCES FOR OUR PARSER -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.1</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>sablecc</executable>
+          <arguments>
+            <argument>-d ${basedir}/src/main/java/</argument>
+            <argument>${basedir}/src/sablecc/sparser.sablecc3</argument>
+          </arguments>
+        </configuration>
+      </plugin>
+      
+    </plugins>
+  </build>
+  
 </project>
